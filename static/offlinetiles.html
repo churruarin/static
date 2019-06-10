@@ -23,12 +23,12 @@ var map = new mapboxgl.Map({
         "version": 8,
         "sources": {
             "simple-tiles": {
-                "type": "raster",
+                "type": "vector",
                 // point to our third-party tiles. Note that some examples
                 // show a "url" property. This only applies to tilesets with
                 // corresponding TileJSON (such as mapbox tiles). 
                 "tiles": ["/tiles/{z}-{x}-{y}.pbf"],
-                "tileSize": 256
+               // "tileSize": 256
             }
         },
         "layers": [{
