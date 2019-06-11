@@ -96,8 +96,8 @@
             "type": "vector"
         }
     },
-    "sprite": "mapbox://sprites/abelbour/cjwscayeh14zg1cnw6akhm5jg/draft",
-    "glyphs": "mapbox://fonts/abelbour/{fontstack}/{range}.pbf",
+    "sprite": "https://static.churruar.in/sprite/sprite",
+    "glyphs": "https://static.churruar.in/glyphs/{fontstack}.pbf?r={range}",
     "layers": [
         {
             "id": "land",
@@ -3796,8 +3796,5 @@
     ],
     "created": "2019-06-11T21:52:51.045Z",
     "id": "cjwscayeh14zg1cnw6akhm5jg",
-    "modified": "2019-06-11T22:42:52.958Z",
-    "owner": "abelbour",
-    "visibility": "private",
-    "draft": true
+    "modified": "2019-06-11T22:42:52.958Z"
 }
