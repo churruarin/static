@@ -44,17 +44,37 @@ map.on('load', function () {
  'type': 'geojson',
  'data': '/geojson/territorios.geojson'
  },
- 'layout': {
-  'line-cap': 'round',
- 'line-join': 'round'//,
- //'text-field': '{territorio}'
- },
- 'paint': {
- 'line-color': '#2E5387',
- //'line-dasharray': [1, 1],
- 'line-width': 8,
- 'line-blur': 2
- }
+ "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    1,
+                    22,
+                    15
+                ],
+                "line-color": "#295494",
+                "line-dasharray": [
+                    "step",
+                    ["zoom"],
+                    ["literal", [1, 0]],
+                    14,
+                    ["literal", [0.5, 1.5]]
+                ],
+                "line-offset": 0,
+                "line-blur": 1,
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    0,
+                    1,
+                    22,
+                    1
+                ]
+            }
  // This is the important part of this example: the addLayer
  // method takes 2 arguments: the layer as an object, and a string
  // representing another layer's name. if the other layer
