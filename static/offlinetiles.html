@@ -41,15 +41,15 @@ map.on('load', function () {
  }
  map.addLayer({
  'id': 'territorios',
- 'type': 'fill',
+ 'type': 'line',
  'source': {
  'type': 'geojson',
  'data': '/geojson/territorios.geojson'
  },
  'layout': {},
  'paint': {
- 'fill-color': '#f88',
- 'fill-opacity': 0.9
+ 'line-color': '2E5387',
+ 'line-width': 3.5
  }
  // This is the important part of this example: the addLayer
  // method takes 2 arguments: the layer as an object, and a string
