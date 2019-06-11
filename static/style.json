@@ -40,12 +40,12 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "tiles": ["/tiles/{z}-{x}-{y}.pbf"],
+      "tiles": ["https://static.churruar.in/tiles/{z}-{x}-{y}.pbf"],
       "minzoom": 8,
       "maxzoom": 14
     }
   },
-  "sprite": "/sprite",
+  "sprite": "https://static.churruar.in/sprite",
   "glyphs": "http://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
   "layers": [
   {
