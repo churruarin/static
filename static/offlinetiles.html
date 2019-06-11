@@ -27,7 +27,10 @@ var map = new mapboxgl.Map({
     center: [-60.495165, -31.746272], // starting position
     zoom: 14 // starting zoom
 });
-
+map.addSource('some id', {
+  type: 'geojson',
+  data: '/geojson/territorios.geojson'
+});
 //map.addControl(new mapboxgl.Navigation());
 </script>
 
