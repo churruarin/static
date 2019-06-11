@@ -45,8 +45,8 @@
       "maxzoom": 14
     }
   },
-  "sprite": "https://openmaptiles.github.io/osm-bright-gl-style/sprite",
-  "glyphs": "https://free.tilehosting.com/fonts/{fontstack}/{range}.pbf?key=y4rAq6KbiqNoBy9KT1Id ",
+  "sprite": "https://static.churruar.in/sprite",
+  "glyphs": "https://static.churruar.in/glyphs/{range}.pbf",
   "layers": [
   {
     "id": "background",
