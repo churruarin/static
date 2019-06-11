@@ -44,11 +44,12 @@ map.on('load', function () {
  'type': 'geojson',
  'data': '/geojson/territorios.geojson'
  },
- 'layout': {},
+ 'layout': {
+  'line-cap': 'round',
+ 'line-join': 'round'
+ },
  'paint': {
  'line-color': '#2E5387',
- 'line-cap': 'round',
- 'line-join': 'round',
  'line-offset': 3.5,
  'line-width': 3.5
  }
