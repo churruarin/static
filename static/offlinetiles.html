@@ -16,10 +16,8 @@
 <div id='map'></div>
 <script>
 
-    //    center: [-31.74, -60.50], // starting position
     // zoom: 8 // starting zoom
     //"tiles": ["/tiles/{z}-{x}-{y}.pbf"],
-//mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuc3dpY2siLCJhIjoieUZiWmwtVSJ9.0cPQywdbPVmvHiHJ6NwdXA';
 
 var map = new mapboxgl.Map({
     container: 'map', // container id
@@ -34,7 +32,7 @@ map.on('load', function () {
  // Find the index of the first symbol layer in the map style
  var firstSymbolId;
  for (var i = 0; i < layers.length; i++) {
- if (layers[i].type === 'line') {
+ if (layers[i].type === 'symbol') {
  firstSymbolId = layers[i].id;
  break;
  }
