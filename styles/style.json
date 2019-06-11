@@ -92,7 +92,7 @@
     "pitch": 0,
     "sources": {
         "composite": {
-            "tiles": ["https://static.churruar.in/tiles/{z}-{x}-{y}.pbf"],,
+            "tiles": ["https://static.churruar.in/tiles/{z}-{x}-{y}.pbf"],
             "type": "vector"
         }
     },
