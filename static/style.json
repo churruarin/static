@@ -45,7 +45,7 @@
       "maxzoom": 14
     }
   },
-  "sprite": "https://static.churruar.in/sprite/sprite",
+  "sprite": "https://static.churruar.in/sprite",
   "glyphs": "https://static.churruar.in/glyphs/{range}.pbf?f={fontstack}",
   "layers": [
   {
