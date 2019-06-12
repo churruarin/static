@@ -75,14 +75,40 @@ map.on('load', function () {
                     1
                 ]
             }
- // This is the important part of this example: the addLayer
- // method takes 2 arguments: the layer as an object, and a string
- // representing another layer's name. if the other layer
- // exists in the stylesheet already, the new layer will be positioned
- // right before that layer in the stack, making it possible to put
- // 'overlays' anywhere in the layer stack.
- // Insert the layer beneath the first symbol layer.
  }, firstSymbolId);
+ map.addLayer({
+ 'id': 'territorios-labels',
+ 'type': 'symbol',
+ 'source': {
+ 'type': 'geojson',
+ 'data': '/geojson/territorios.geojson'
+ },
+ "layout": {
+                "text-field": ["to-string", ["get", "territorio"]],
+                "text-font": ["DIN_Offc_Pro_Bold"],
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12.9,
+                    0,
+                    13,
+                    10,
+                    22,
+                    90
+                ],
+                "symbol-avoid-edges": true,
+                "text-padding": 10,
+                "text-allow-overlap": true
+            },
+            "paint": {
+                "text-halo-color": "hsla(0, 0%, 100%, 0.74)",
+                "text-halo-width": 4,
+                "text-halo-blur": 1,
+                "text-color": "#1a3660"
+            }
+ }, firstSymbolId);
+ 
  });
 </script>
 
