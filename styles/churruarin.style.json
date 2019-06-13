@@ -13,7 +13,10 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "tiles": ["https://static.churruar.in/tiles/{z}-{x}-{y}.pbf"],
+      "tiles": [
+        "https://static.churruar.in/tiles/{z}-{x}-{y}.pbf",
+        "https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=S0aTx8No2plrAwFalD6Y"
+      ],
       "minzoom": 8,
       "maxzoom": 14
     }
