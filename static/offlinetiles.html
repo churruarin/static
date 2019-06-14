@@ -189,6 +189,7 @@ $.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1lxeVaIe_AaCAr6yEc14XUp
             //Devuelve solo el hash de la congregación
            actividad = jsonata('$.values.({"tm":$[0],"fecha":$[1]})').evaluate(actividad);
  });
+});
 </script>
 
 </body>
