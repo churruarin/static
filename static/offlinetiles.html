@@ -28,7 +28,19 @@ var map = new mapboxgl.Map({
     zoom: 14 // starting zoom
 });
 map.on('load', function () {
- 
+ var actividad, manzanas, expression;
+ $.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1lxeVaIe_AaCAr6yEc14XUp7q4I-XWg9MgTV-jICDHso/values/ManzanasAbarcadas?key=AIzaSyCHu7lPjGMgsv6X_U6FgL6atwHQ5Mhk_nY', function(json) {
+  manzanas = json;
+}).done(function(actividad){
+ $.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1lxeVaIe_AaCAr6yEc14XUp7q4I-XWg9MgTV-jICDHso/values/ManzanasAbarcadas?key=AIzaSyCHu7lPjGMgsv6X_U6FgL6atwHQ5Mhk_nY', function(json) {
+  actividad = json;
+}).done(function(actividad,manzanas){
+            //Devuelve solo el hash de la congregación
+            expression = ('$actividad := $[1].values.({"tm":$[0],"fecha":$[1]});{"type": "FeatureCollection","features": $map($[0].features,function($v){($fecha:=$actividad[tm=$v.properties.tm].fecha;$properties:={"properties":$merge([$v.properties,{"fechaAbarcado":$fecha,"diasTranscurridos":$round(($toMillis($now())-$toMillis($fecha))/86400000)}])};$merge([$v,$properties]))})})');
+            manzanas = [manzanas,actividad];
+           manzanas = jsonata(expression).evaluate(manzanas);
+ });
+
  var layers = map.getStyle().layers;
  // Find the index of the first symbol layer in the map style
  var firstSymbolId;
@@ -43,7 +55,7 @@ map.on('load', function () {
  'type': 'fill',
  'source': {
  'type': 'geojson',
- 'data': '/geojson/manzanas.geojson'
+ 'data': manzanas
  },
  "layout": {},
             "paint": {
@@ -68,7 +80,7 @@ map.on('load', function () {
  'type': 'line',
  'source': {
  'type': 'geojson',
- 'data': '/geojson/manzanas.geojson'
+ 'data': manzanas
  },
  "layout": {"line-join": "round"},
             "paint": {
@@ -84,7 +96,7 @@ map.on('load', function () {
  'type': 'symbol',
  'source': {
  'type': 'geojson',
- 'data': '/geojson/manzanas.sample.geojson'
+ 'data': manzanas
  },
  "glyphs": "https://static.churruar.in/glyphs/{fontstack}.pbf&r={range}",
  "layout": {
@@ -182,13 +194,8 @@ map.on('load', function () {
                 "text-translate-anchor": "viewport"
             }
  }, firstSymbolId);
- var actividad;
-$.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1lxeVaIe_AaCAr6yEc14XUp7q4I-XWg9MgTV-jICDHso/values/ManzanasAbarcadas?key=AIzaSyCHu7lPjGMgsv6X_U6FgL6atwHQ5Mhk_nY', function(json) {
-  actividad = json;
-}).done(function(actividad){
-            //Devuelve solo el hash de la congregación
-           actividad = jsonata('$.values.({"tm":$[0],"fecha":$[1]})').evaluate(actividad);
- });
+
+
 });
 </script>
 
