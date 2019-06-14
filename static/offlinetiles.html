@@ -35,7 +35,7 @@ map.on('load', function () {
 }).done(function(actividad){
  $.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1lxeVaIe_AaCAr6yEc14XUp7q4I-XWg9MgTV-jICDHso/values/ManzanasAbarcadas?key=AIzaSyCHu7lPjGMgsv6X_U6FgL6atwHQ5Mhk_nY', function(json) {
   actividad = json;
-  actividad =  jsonata('$.values.({"tm":$[0],"fechaAbarcado":$[1]},"diasTranscurridos":$round(($toMillis($now())-$toMillis($[1]))/86400000)))').evaluate(actividad);
+  actividad =  jsonata('$.values.({"tm":$[0],"fechaAbarcado":$[1],"diasTranscurridos":$round(($toMillis($now())-$toMillis($[1]))/86400000)})').evaluate(actividad);
   console.log(actividad);
 }).done(function(){
             //Devuelve solo el hash de la congregación
