@@ -34,7 +34,7 @@ map.on('load', function () {
 }).done(function(actividad){
  $.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1lxeVaIe_AaCAr6yEc14XUp7q4I-XWg9MgTV-jICDHso/values/ManzanasAbarcadas?key=AIzaSyCHu7lPjGMgsv6X_U6FgL6atwHQ5Mhk_nY', function(json) {
   actividad = json;
-}).done(function(actividad,manzanas){
+}).done(function(){
             //Devuelve solo el hash de la congregación
             expression = ('($actividad := $[1].values.({"tm":$[0],"fecha":$[1]});{"type": "FeatureCollection","features": $map($[0].features,function($v){($fecha:=$actividad[tm=$v.properties.tm].fecha;$properties:={"properties":$merge([$v.properties,{"fechaAbarcado":$fecha,"diasTranscurridos":$round(($toMillis($now())-$toMillis($fecha))/86400000)}])};$merge([$v,$properties]))})})');
             manzanas = [manzanas,actividad];
