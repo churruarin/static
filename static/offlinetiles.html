@@ -3,7 +3,7 @@
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  
+    <script src="https://cdn.jsdelivr.net/npm/jsonata/jsonata.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.css" rel='stylesheet' />
     <style>
@@ -38,6 +38,82 @@ map.on('load', function () {
  }
  }
  map.addLayer({
+ 'id': 'manzanas',
+ 'type': 'fill',
+ 'source': {
+ 'type': 'geojson',
+ 'data': '/geojson/manzanas.sample.geojson'
+ },
+ "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["get", "diasTranscurridos"],
+                    0,
+                    "hsla(134, 85%, 39%, 0.6)",
+                    20,
+                    "hsla(59, 76%, 49%, 0.57)",
+                    45,
+                    "hsla(0, 76%, 49%, 0.57)",
+                    60,
+                    "hsla(0, 93%, 44%, 0.57)"
+                ],
+                "fill-opacity": 0.83
+            }
+ }, firstSymbolId);
+ map.addLayer({
+ 'id': 'manzanas-border',
+ 'type': 'line',
+ 'source': {
+ 'type': 'geojson',
+ 'data': '/geojson/manzanas.sample.geojson'
+ },
+ "layout": {"line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 100%, 100%)",
+                "line-opacity": 0.67,
+                "line-width": 8,
+                "line-offset": 0,
+                "line-blur": 5
+            }
+ }, firstSymbolId);
+ map.addLayer({
+ 'id': 'manzanas-labels',
+ 'type': 'symbol',
+ 'source': {
+ 'type': 'geojson',
+ 'data': '/geojson/manzanas.sample.geojson'
+ },
+ "glyphs": "https://static.churruar.in/glyphs/{fontstack}.pbf&r={range}",
+ "layout": {
+                "text-field": ["to-string", ["get", "mza"]],
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14.5,
+                    0,
+                    14.6,
+                    9,
+                    22,
+                    35
+                ],
+                "symbol-avoid-edges": true,
+                "text-allow-overlap": true,
+                "text-padding": 0,
+                "text-justify": "auto",
+                "text-pitch-alignment": "map",
+                "text-rotation-alignment": "viewport"
+            },
+            "paint": {
+                "text-halo-color": "hsla(0, 0%, 100%, 0.77)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-translate-anchor": "viewport"
+            }
+ }, firstSymbolId);
+ map.addLayer({
  'id': 'territorios',
  'type': 'line',
  'source': {
@@ -45,15 +121,15 @@ map.on('load', function () {
  'data': '/geojson/territorios.geojson'
  },
  "layout": {"line-cap": "round", "line-join": "round"},
-            "paint": {
+ "paint": {
                 "line-width": [
                     "interpolate",
                     ["linear"],
                     ["zoom"],
-                    10,
+                    13,
                     1,
                     22,
-                    15
+                    20
                 ],
                 "line-color": "#295494",
                 "line-dasharray": [
@@ -65,15 +141,8 @@ map.on('load', function () {
                 ],
                 "line-offset": 0,
                 "line-blur": 1,
-                "line-opacity": [
-                    "interpolate",
-                    ["linear"],
-                    ["zoom"],
-                    0,
-                    1,
-                    22,
-                    1
-                ]
+                "line-translate-anchor": "viewport",
+                "line-opacity": 0.72
             }
  }, firstSymbolId);
  map.addLayer({
@@ -100,13 +169,16 @@ map.on('load', function () {
                 ],
                 "symbol-avoid-edges": true,
                 "text-padding": 10,
-                "text-allow-overlap": true
+                "text-allow-overlap": true,
+                "text-justify": "auto",
+                "text-pitch-alignment": "map"
             },
             "paint": {
                 "text-halo-color": "hsla(0, 0%, 100%, 0.74)",
                 "text-halo-width": 4,
                 "text-halo-blur": 1,
-                "text-color": "#1a3660"
+                "text-color": "#295494",
+                "text-translate-anchor": "viewport"
             }
  }, firstSymbolId);
  
