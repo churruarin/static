@@ -39,6 +39,7 @@ map.on('load', function () {
             expression = ('($actividad := $[1].values.({"tm":$[0],"fecha":$[1]});{"type": "FeatureCollection","features": $map($[0].features,function($v){($fecha:=$actividad[tm=$v.properties.tm].fecha;$properties:={"properties":$merge([$v.properties,{"fechaAbarcado":$fecha,"diasTranscurridos":$round(($toMillis($now())-$toMillis($fecha))/86400000)}])};$merge([$v,$properties]))})})');
             manzanas = [manzanas,actividad];
            manzanas = jsonata(expression).evaluate(manzanas);
+           console.log(manzanas)
  });
 });
  var layers = map.getStyle().layers;
