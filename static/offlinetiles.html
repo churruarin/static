@@ -4,6 +4,7 @@
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src="https://cdn.jsdelivr.net/npm/jsonata/jsonata.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.css" rel='stylesheet' />
     <style>
@@ -42,7 +43,7 @@ map.on('load', function () {
  'type': 'fill',
  'source': {
  'type': 'geojson',
- 'data': '/geojson/manzanas.sample.geojson'
+ 'data': '/geojson/manzanas.geojson'
  },
  "layout": {},
             "paint": {
@@ -67,7 +68,7 @@ map.on('load', function () {
  'type': 'line',
  'source': {
  'type': 'geojson',
- 'data': '/geojson/manzanas.sample.geojson'
+ 'data': '/geojson/manzanas.geojson'
  },
  "layout": {"line-join": "round"},
             "paint": {
@@ -181,7 +182,12 @@ map.on('load', function () {
                 "text-translate-anchor": "viewport"
             }
  }, firstSymbolId);
- 
+ var actividad;
+$.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1lxeVaIe_AaCAr6yEc14XUp7q4I-XWg9MgTV-jICDHso/values/ManzanasAbarcadas?key=AIzaSyCHu7lPjGMgsv6X_U6FgL6atwHQ5Mhk_nY', function(json) {
+  actividad = json;
+}).done(function(actividad){
+            //Devuelve solo el hash de la congregación
+           actividad = jsonata('$.values.({"tm":$[0],"fecha":$[1]})').evaluate(actividad);
  });
 </script>
 
