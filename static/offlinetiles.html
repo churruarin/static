@@ -4,6 +4,7 @@
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src="https://cdn.jsdelivr.net/npm/jsonata/jsonata.min.js"></script>
+    <script src="/js/joiner.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.css" rel='stylesheet' />
@@ -34,13 +35,24 @@ map.on('load', function () {
 }).done(function(actividad){
  $.getJSON('https://sheets.googleapis.com/v4/spreadsheets/1lxeVaIe_AaCAr6yEc14XUp7q4I-XWg9MgTV-jICDHso/values/ManzanasAbarcadas?key=AIzaSyCHu7lPjGMgsv6X_U6FgL6atwHQ5Mhk_nY', function(json) {
   actividad = json;
+  actividad =  jsonata('$.values.({"tm":$[0],"fechaAbarcado":$[1]},"diasTranscurridos":$round(($toMillis($now())-$toMillis($[1]))/86400000)))').evaluate(actividad);
+  console.log(actividad);
 }).done(function(){
             //Devuelve solo el hash de la congregación
-            expression = ('($actividad := $[1].values.({"tm":$[0],"fecha":$[1]});{"type": "FeatureCollection","features": $map($[0].features,function($v){($fecha:=$actividad[tm=$v.properties.tm].fecha;$properties:={"properties":$merge([$v.properties,{"fechaAbarcado":$fecha,"diasTranscurridos":$round(($toMillis($now())-$toMillis($fecha))/86400000)}])};$merge([$v,$properties]))})})');
-            manzanas = [manzanas,actividad];
-            console.log(manzanas);
-           manzanas = jsonata(expression).evaluate(manzanas);
-           console.log(manzanas)
+           // expression = ('($actividad := $[1].values.({"tm":$[0],"fecha":$[1]});{"type": "FeatureCollection","features": $map($[0].features,function($v){($fecha:=$actividad[tm=$v.properties.tm].fecha;$properties:={"properties":$merge([$v.properties,{"fechaAbarcado":$fecha,"diasTranscurridos":$round(($toMillis($now())-$toMillis($fecha))/86400000)}])};$merge([$v,$properties]))})})');
+           // manzanas = [manzanas,actividad];
+           // console.log(manzanas);
+           //manzanas = jsonata(expression).evaluate(manzanas);
+           //console.log(manzanas)
+           manzanas = joiner({
+  leftData: manzanas,
+  leftDataKey: 'properties.tm',
+  rightData: actividad,
+  rightDataKey: 'tm',
+  nestKey: 'properties',
+  geoJson: true
+})  ;
+console.log(manzanas);    
  }).done(function(){
   map.addLayer({
  'id': 'manzanas',
