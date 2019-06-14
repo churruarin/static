@@ -20,15 +20,6 @@
 
     // zoom: 8 // starting zoom
     //"tiles": ["/tiles/{z}-{x}-{y}.pbf"],
-
-var map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: "/styles/churruarin.style.json",
-    center: [-60.495165, -31.746272], // starting position
-    bearing: 10,
-    zoom: 14 // starting zoom
-});
-map.on('load', function () {
  var actividad, manzanas, expression;
  $.getJSON('/geojson/manzanas.geojson', function(json) {
   manzanas = json;
@@ -54,8 +45,27 @@ map.on('load', function () {
 })  ;
 console.log(JSON.stringify(manzanas));    
 manzanas=manzanas.data;
- }).done(function(){
-  map.addLayer({
+ })
+});
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: "/styles/churruarin.style.json",
+    center: [-60.495165, -31.746272], // starting position
+    bearing: 10,
+    zoom: 14 // starting zoom
+});
+map.on('load', function () {
+
+ var layers = map.getStyle().layers;
+ // Find the index of the first symbol layer in the map style
+ var firstSymbolId;
+ for (var i = 0; i < layers.length; i++) {
+ if (layers[i].id === 'road_major_label') {
+ firstSymbolId = layers[i].id;
+ break;
+ }
+ }
+ map.addLayer({
  'id': 'manzanas',
  'type': 'fill',
  'source': {
@@ -131,18 +141,6 @@ manzanas=manzanas.data;
                 "text-translate-anchor": "viewport"
             }
  }, firstSymbolId);
-});
-});
- var layers = map.getStyle().layers;
- // Find the index of the first symbol layer in the map style
- var firstSymbolId;
- for (var i = 0; i < layers.length; i++) {
- if (layers[i].id === 'road_major_label') {
- firstSymbolId = layers[i].id;
- break;
- }
- }
-
  map.addLayer({
  'id': 'territorios',
  'type': 'line',
