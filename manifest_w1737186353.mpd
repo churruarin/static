@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MPD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns="urn:mpeg:dash:schema:mpd:2011"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xsi:schemaLocation="urn:mpeg:DASH:schema:MPD:2011 http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-DASH_schema_files/DASH-MPD.xsd"
+     profiles="urn:mpeg:dash:profile:isoff-live:2011"
+     type="dynamic"
+     minimumUpdatePeriod="PT6.419S" 
+     publishTime="2019-12-26T14:55:33Z" 
+     availabilityStartTime="2019-12-26T13:34:04Z" 
+     timeShiftBufferDepth="PT46.907S"
+     suggestedPresentationDelay="PT20.0S" 
+     minBufferTime="PT6.0S">
+<ProgramInformation>
+    <Title>livestream</Title>
+</ProgramInformation>
+<Period id="0" start="PT0.0S">
+    <AdaptationSet id="0" group="1" mimeType="video/mp4" width="1280" height="720" par="16:9" frameRate="2" segmentAlignment="true" startWithSAP="1" subsegmentAlignment="true" subsegmentStartsWithSAP="1">
+        <SegmentTemplate timescale="90000" media="http://abelbour.flashmediacast.com:1935/abelbour/livestream/chunk_ctvideo_cfm4s_rid$RepresentationID$_cs$Time$_w1737186353_mpd.m4s" initialization="http://abelbour.flashmediacast.com:1935/abelbour/livestream/chunk_ctvideo_cfm4s_rid$RepresentationID$_cinit_w1737186353_mpd.m4s">
+            <SegmentTimeline>
+                <S t="435434940" d="399420"/>
+                <S d="422280"/>
+                <S d="422190"/>
+                <S d="384480"/>
+                <S d="467910"/>
+            </SegmentTimeline>
+        </SegmentTemplate>
+        <Representation id="p0va0br204592" codecs="avc1.64001f" sar="1:1" bandwidth="204592" />
+    </AdaptationSet>
+    <AdaptationSet id="1" group="2" mimeType="audio/mp4" lang="eng" segmentAlignment="true" startWithSAP="1" subsegmentAlignment="true" subsegmentStartsWithSAP="1">
+        <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
+        <SegmentTemplate timescale="44100" media="http://abelbour.flashmediacast.com:1935/abelbour/livestream/chunk_ctaudio_cfm4s_rid$RepresentationID$_cs$Time$_w1737186353_mpd.m4s" initialization="http://abelbour.flashmediacast.com:1935/abelbour/livestream/chunk_ctaudio_cfm4s_rid$RepresentationID$_cinit_w1737186353_mpd.m4s">
+            <SegmentTimeline>
+                <S t="213117484" d="441352"/>
+                <S d="471033"/>
+                <S d="459786"/>
+                <S d="441353"/>
+                <S d="500711"/>
+            </SegmentTimeline>
+        </SegmentTemplate>
+        <Representation id="p0aa0br2063" codecs="mp4a.40.2" audioSamplingRate="44100" bandwidth="2063">
+        </Representation>
+    </AdaptationSet>
+</Period>
+<UTCTiming schemeIdUri="urn:mpeg:dash:utc:direct:2014" value="2019-12-26T14:55:33Z"/>
+</MPD>
